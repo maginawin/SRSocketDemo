@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A4ABC01C1C48E16E00CBAC09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC01B1C48E16E00CBAC09 /* main.m */; };
+		A4ABC01F1C48E16E00CBAC09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC01E1C48E16E00CBAC09 /* AppDelegate.m */; };
+		A4ABC0221C48E16E00CBAC09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0211C48E16E00CBAC09 /* ViewController.m */; };
+		A4ABC0251C48E16E00CBAC09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4ABC0231C48E16E00CBAC09 /* Main.storyboard */; };
+		A4ABC0271C48E16E00CBAC09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4ABC0261C48E16E00CBAC09 /* Assets.xcassets */; };
+		A4ABC02A1C48E16E00CBAC09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4ABC0281C48E16E00CBAC09 /* LaunchScreen.storyboard */; };
+		A4ABC0371C48E19500CBAC09 /* SRWiFiDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0361C48E19500CBAC09 /* SRWiFiDevice.m */; };
+		A4ABC03A1C48E1AC00CBAC09 /* SRWiFiProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0391C48E1AC00CBAC09 /* SRWiFiProtocol.m */; };
+		A4ABC03D1C48E1C400CBAC09 /* SRWiFiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC03C1C48E1C400CBAC09 /* SRWiFiManager.m */; };
+		A4ABC0401C48EC2000CBAC09 /* SRRoomTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC03F1C48EC2000CBAC09 /* SRRoomTableViewCellModel.m */; };
+		A4ABC0431C48EC3C00CBAC09 /* SRLampModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0421C48EC3C00CBAC09 /* SRLampModel.m */; };
+		A4ABC0481C48F21A00CBAC09 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0451C48F21A00CBAC09 /* GCDAsyncSocket.m */; };
+		A4ABC0491C48F21A00CBAC09 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0471C48F21A00CBAC09 /* GCDAsyncUdpSocket.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A4ABC0171C48E16E00CBAC09 /* SRSocketDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRSocketDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4ABC01B1C48E16E00CBAC09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A4ABC01D1C48E16E00CBAC09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A4ABC01E1C48E16E00CBAC09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A4ABC0201C48E16E00CBAC09 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A4ABC0211C48E16E00CBAC09 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A4ABC0241C48E16E00CBAC09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A4ABC0261C48E16E00CBAC09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A4ABC0291C48E16E00CBAC09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A4ABC02B1C48E16E00CBAC09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4ABC0351C48E19500CBAC09 /* SRWiFiDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWiFiDevice.h; sourceTree = "<group>"; };
+		A4ABC0361C48E19500CBAC09 /* SRWiFiDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWiFiDevice.m; sourceTree = "<group>"; };
+		A4ABC0381C48E1AC00CBAC09 /* SRWiFiProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWiFiProtocol.h; sourceTree = "<group>"; };
+		A4ABC0391C48E1AC00CBAC09 /* SRWiFiProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWiFiProtocol.m; sourceTree = "<group>"; };
+		A4ABC03B1C48E1C400CBAC09 /* SRWiFiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWiFiManager.h; sourceTree = "<group>"; };
+		A4ABC03C1C48E1C400CBAC09 /* SRWiFiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWiFiManager.m; sourceTree = "<group>"; };
+		A4ABC03E1C48EC2000CBAC09 /* SRRoomTableViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRoomTableViewCellModel.h; sourceTree = "<group>"; };
+		A4ABC03F1C48EC2000CBAC09 /* SRRoomTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRoomTableViewCellModel.m; sourceTree = "<group>"; };
+		A4ABC0411C48EC3C00CBAC09 /* SRLampModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRLampModel.h; sourceTree = "<group>"; };
+		A4ABC0421C48EC3C00CBAC09 /* SRLampModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRLampModel.m; sourceTree = "<group>"; };
+		A4ABC0441C48F21A00CBAC09 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		A4ABC0451C48F21A00CBAC09 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		A4ABC0461C48F21A00CBAC09 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		A4ABC0471C48F21A00CBAC09 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4ABC0141C48E16E00CBAC09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A4ABC00E1C48E16E00CBAC09 = {
+			isa = PBXGroup;
+			children = (
+				A4ABC0191C48E16E00CBAC09 /* SRSocketDemo */,
+				A4ABC0181C48E16E00CBAC09 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A4ABC0181C48E16E00CBAC09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4ABC0171C48E16E00CBAC09 /* SRSocketDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A4ABC0191C48E16E00CBAC09 /* SRSocketDemo */ = {
+			isa = PBXGroup;
+			children = (
+				A4ABC0311C48E17A00CBAC09 /* SRWiFi */,
+				A4ABC01D1C48E16E00CBAC09 /* AppDelegate.h */,
+				A4ABC01E1C48E16E00CBAC09 /* AppDelegate.m */,
+				A4ABC0201C48E16E00CBAC09 /* ViewController.h */,
+				A4ABC0211C48E16E00CBAC09 /* ViewController.m */,
+				A4ABC0231C48E16E00CBAC09 /* Main.storyboard */,
+				A4ABC0261C48E16E00CBAC09 /* Assets.xcassets */,
+				A4ABC0281C48E16E00CBAC09 /* LaunchScreen.storyboard */,
+				A4ABC02B1C48E16E00CBAC09 /* Info.plist */,
+				A4ABC01A1C48E16E00CBAC09 /* Supporting Files */,
+			);
+			path = SRSocketDemo;
+			sourceTree = "<group>";
+		};
+		A4ABC01A1C48E16E00CBAC09 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A4ABC01B1C48E16E00CBAC09 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4ABC0311C48E17A00CBAC09 /* SRWiFi */ = {
+			isa = PBXGroup;
+			children = (
+				A4ABC04A1C48F21E00CBAC09 /* GCDAsyncSocket */,
+				A4ABC03E1C48EC2000CBAC09 /* SRRoomTableViewCellModel.h */,
+				A4ABC03F1C48EC2000CBAC09 /* SRRoomTableViewCellModel.m */,
+				A4ABC0411C48EC3C00CBAC09 /* SRLampModel.h */,
+				A4ABC0421C48EC3C00CBAC09 /* SRLampModel.m */,
+				A4ABC0351C48E19500CBAC09 /* SRWiFiDevice.h */,
+				A4ABC0361C48E19500CBAC09 /* SRWiFiDevice.m */,
+				A4ABC0381C48E1AC00CBAC09 /* SRWiFiProtocol.h */,
+				A4ABC0391C48E1AC00CBAC09 /* SRWiFiProtocol.m */,
+				A4ABC03B1C48E1C400CBAC09 /* SRWiFiManager.h */,
+				A4ABC03C1C48E1C400CBAC09 /* SRWiFiManager.m */,
+			);
+			name = SRWiFi;
+			sourceTree = "<group>";
+		};
+		A4ABC04A1C48F21E00CBAC09 /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				A4ABC0441C48F21A00CBAC09 /* GCDAsyncSocket.h */,
+				A4ABC0451C48F21A00CBAC09 /* GCDAsyncSocket.m */,
+				A4ABC0461C48F21A00CBAC09 /* GCDAsyncUdpSocket.h */,
+				A4ABC0471C48F21A00CBAC09 /* GCDAsyncUdpSocket.m */,
+			);
+			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A4ABC0161C48E16E00CBAC09 /* SRSocketDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4ABC02E1C48E16E00CBAC09 /* Build configuration list for PBXNativeTarget "SRSocketDemo" */;
+			buildPhases = (
+				A4ABC0131C48E16E00CBAC09 /* Sources */,
+				A4ABC0141C48E16E00CBAC09 /* Frameworks */,
+				A4ABC0151C48E16E00CBAC09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SRSocketDemo;
+			productName = SRSocketDemo;
+			productReference = A4ABC0171C48E16E00CBAC09 /* SRSocketDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A4ABC00F1C48E16E00CBAC09 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = sunricher;
+				TargetAttributes = {
+					A4ABC0161C48E16E00CBAC09 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = A4ABC0121C48E16E00CBAC09 /* Build configuration list for PBXProject "SRSocketDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A4ABC00E1C48E16E00CBAC09;
+			productRefGroup = A4ABC0181C48E16E00CBAC09 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A4ABC0161C48E16E00CBAC09 /* SRSocketDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A4ABC0151C48E16E00CBAC09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4ABC02A1C48E16E00CBAC09 /* LaunchScreen.storyboard in Resources */,
+				A4ABC0271C48E16E00CBAC09 /* Assets.xcassets in Resources */,
+				A4ABC0251C48E16E00CBAC09 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A4ABC0131C48E16E00CBAC09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4ABC0431C48EC3C00CBAC09 /* SRLampModel.m in Sources */,
+				A4ABC0221C48E16E00CBAC09 /* ViewController.m in Sources */,
+				A4ABC01F1C48E16E00CBAC09 /* AppDelegate.m in Sources */,
+				A4ABC03A1C48E1AC00CBAC09 /* SRWiFiProtocol.m in Sources */,
+				A4ABC01C1C48E16E00CBAC09 /* main.m in Sources */,
+				A4ABC0371C48E19500CBAC09 /* SRWiFiDevice.m in Sources */,
+				A4ABC0491C48F21A00CBAC09 /* GCDAsyncUdpSocket.m in Sources */,
+				A4ABC0481C48F21A00CBAC09 /* GCDAsyncSocket.m in Sources */,
+				A4ABC0401C48EC2000CBAC09 /* SRRoomTableViewCellModel.m in Sources */,
+				A4ABC03D1C48E1C400CBAC09 /* SRWiFiManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A4ABC0231C48E16E00CBAC09 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4ABC0241C48E16E00CBAC09 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A4ABC0281C48E16E00CBAC09 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4ABC0291C48E16E00CBAC09 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A4ABC02C1C48E16E00CBAC09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A4ABC02D1C48E16E00CBAC09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A4ABC02F1C48E16E00CBAC09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SRSocketDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunricher.SRSocketDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A4ABC0301C48E16E00CBAC09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SRSocketDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunricher.SRSocketDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A4ABC0121C48E16E00CBAC09 /* Build configuration list for PBXProject "SRSocketDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4ABC02C1C48E16E00CBAC09 /* Debug */,
+				A4ABC02D1C48E16E00CBAC09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4ABC02E1C48E16E00CBAC09 /* Build configuration list for PBXNativeTarget "SRSocketDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4ABC02F1C48E16E00CBAC09 /* Debug */,
+				A4ABC0301C48E16E00CBAC09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A4ABC00F1C48E16E00CBAC09 /* Project object */;
+}
