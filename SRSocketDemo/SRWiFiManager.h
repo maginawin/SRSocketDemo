@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SRWiFiDevice.h"
+#import "SRWiFiProtocol.h"
 
 #define SRWiFiTCPPort (8899)
 #define SRWiFiUDPPort (48899)
@@ -34,9 +36,15 @@ typedef void (^ SRWiFiManagerSendReceiver) (NSString *receivedString);
 
 @property (nonatomic, readonly) SRWiFiManagerConnectType connectType;
 
+@property (strong, nonatomic) NSMutableArray<SRWiFiDevice *> *wifiDevices;
+
+@property (strong, nonatomic) NSString *hostForUDP;
+
 + (instancetype)sharedInstance;
 
 + (BOOL)isWiFiConnected;
+
+- (void)refreshHostForUDP;
 
 //- (NSString *)wifiIPAddress;
 

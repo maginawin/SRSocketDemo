@@ -7,8 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "SRWiFiManager.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *receiveTextView;
 
 @end
 
@@ -17,6 +19,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (IBAction)udpConnect:(id)sender {
+    [[SRWiFiManager sharedInstance] connectUDPWithPort:SRWiFiUDPPort];
+}
+
+- (IBAction)udpScan:(id)sender {
+    [[SRWiFiManager sharedInstance] sendData:[SRWiFiProtocol srDataForSettingScan] withType:SRWiFiManagerConnectTypeUDP times:3 sendTag:SRWiFiManagerSendDataTagForSettingScan timeout:-1 receiver:^(NSString *receivedString) {
+        
+    }];
+}
+
+- (IBAction)closeAll:(id)sender {
+    [[SRWiFiManager sharedInstance] disconnectSocket];
 }
 
 - (void)didReceiveMemoryWarning {

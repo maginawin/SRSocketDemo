@@ -11,4 +11,20 @@
 
 @implementation SRWiFiProtocol
 
++ (NSData *)srDataForSettingScan {
+    NSData *data = [@"HF-A11ASSISTHREAD" dataUsingEncoding:NSASCIIStringEncoding];
+    
+    return data;
+}
+
++ (NSData *)srDataForSettingOK {
+    NSMutableData *data = [NSMutableData dataWithData:[@"+OK" dataUsingEncoding:NSASCIIStringEncoding]];
+    
+    unsigned const char end = 0x0D;
+    
+    [data appendBytes:&end length:1];
+    
+    return data;
+}
+
 @end
