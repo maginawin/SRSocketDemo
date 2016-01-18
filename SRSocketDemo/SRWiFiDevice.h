@@ -13,5 +13,6 @@
 @property (strong, nonatomic) NSString *ipAddress;
 @property (strong, nonatomic) NSString *macAddrss;
 @property (strong, nonatomic) NSString *security;
+@property (strong, nonatomic) NSString *name;
 
 @end

@@ -36,13 +36,53 @@
 }
 
 + (NSData *)srDataForSettingOK {
-    NSMutableData *data = [NSMutableData dataWithData:[@"+OK" dataUsingEncoding:NSASCIIStringEncoding]];
+    NSMutableData *data = [NSMutableData dataWithData:[@"+ok" dataUsingEncoding:NSASCIIStringEncoding]];
     
-    unsigned const char end = 0x0D;
-    
-    [data appendBytes:&end length:1];
+//    unsigned const char end = 0x0D;
+//    
+//    [data appendBytes:&end length:1];
     
     return data;
+}
+
++ (NSData *)srDataForSettingFetchWiFiNearby {
+    NSMutableData *result = [NSMutableData data];
+    
+    NSData *header = [@"AT+WSCAN" dataUsingEncoding:NSASCIIStringEncoding];
+    [result appendData:header];
+    
+    unsigned const char end = 0x0D;
+    [result appendBytes:&end length:1];
+    
+    return result;
+}
+
++ (NSData *)srDataForSettingWiFiName:(NSString *)wifiName {
+    NSMutableData *result = [NSMutableData data];
+    
+    
+    return result;
+}
+
++ (NSData *)srDataForSettingWiFiSecurity:(NSString *)security password:(NSString *)password {
+    NSMutableData *result = [NSMutableData data];
+    
+    
+    return result;
+}
+
++ (NSData *)srDataForSettingMode {
+    NSMutableData *result = [NSMutableData data];
+    
+    
+    return result;
+}
+
++ (NSData *)srDataForSettingEnd {
+    NSMutableData *result = [NSMutableData data];
+    
+    
+    return result;
 }
 
 @end

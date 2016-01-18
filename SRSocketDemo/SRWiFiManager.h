@@ -15,6 +15,14 @@
 #define SRWiFiTCPPort (8899)
 #define SRWiFiUDPPort (48899)
 
+#define SRWiFiTCPHeartBeatSendInterval (60)
+
+#define SRWiFiManagerUDPDefaultHost @"10.10.100.254"
+
+// Nofication key
+#define SRWiFiManagerNotiUDPReceiveData @"SRWiFiManagerNotiReceiveData"
+#define SRWiFiManagerNotiTCPReceiveData @"SRWiFiManagerNotiTCPReceiveData"
+
 typedef NS_ENUM(NSInteger, SRWiFiManagerConnectType) {
     SRWiFiManagerConnectTypeTCP = 0,
     SRWiFiManagerConnectTypeUDP = 1,
@@ -33,21 +41,21 @@ typedef NS_ENUM(NSInteger, SRWiFiManagerSendDataTag) {
     SRWiFiManagerSendDataTagForHeartBeatPackage = 8
 };
 
-typedef void (^ SRWiFiManagerSendReceiver) (NSString *receivedString);
-
 @interface SRWiFiManager : NSObject
 
 @property (nonatomic, readonly) SRWiFiManagerConnectType connectType;
 
 @property (strong, nonatomic) NSMutableDictionary<NSString *, GCDAsyncSocket *> *tcpSocketDictionary;
 
-@property (strong, nonatomic) NSMutableArray<SRWiFiDevice *> *wifiDevices;
+@property (strong, nonatomic) NSMutableDictionary<NSString *, SRWiFiDevice *> *wifiDevicesDictionary;
 
 @property (strong, nonatomic) NSString *hostForUDP;
 
 + (instancetype)sharedInstance;
 
 + (BOOL)isWiFiConnected;
+
++ (SRWiFiDevice *)convertReceiveStringToWiFiDevice:(NSString *)aString;
 
 - (void)refreshHostForUDP;
 
@@ -59,6 +67,8 @@ typedef void (^ SRWiFiManagerSendReceiver) (NSString *receivedString);
 
 - (void)connectUDPWithPort:(NSUInteger)port;
 
-- (void)sendData:(NSData *)data withType:(SRWiFiManagerConnectType)type times:(NSUInteger)times sendTag:(SRWiFiManagerSendDataTag)tag timeout:(NSInteger)timeout receiver:(SRWiFiManagerSendReceiver)receiver;
+- (void)sendData:(NSData *)data withType:(SRWiFiManagerConnectType)type times:(NSUInteger)times sendTag:(SRWiFiManagerSendDataTag)tag timeout:(NSInteger)timeout;
+
+- (void)sendDataForScanWiFi;
 
 @end

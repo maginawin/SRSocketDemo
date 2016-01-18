@@ -17,8 +17,6 @@
 
 @property (strong, nonatomic) GCDAsyncUdpSocket *udpSocket;
 
-@property (strong, nonatomic) SRWiFiManagerSendReceiver sendReceiver;
-
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSString *> *receiverDictionary;
 
 @property (nonatomic) NSUInteger reconnectTimes;
@@ -86,6 +84,8 @@ dispatch_queue_t wifiManagerQueue;
     
     [self disconnectSocket];
     
+    [self refreshHostForUDP];
+    
     _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:wifiManagerQueue];
     
     if (![_udpSocket enableBroadcast:YES error:&err]) {
@@ -93,11 +93,8 @@ dispatch_queue_t wifiManagerQueue;
         
         return;
     }
-
-//    [self refreshHostForUDP];
-//    [_udpSocket connectToHost:_hostForUDP onPort:SRWiFiUDPPort error:&err];
     
-    if (![_udpSocket bindToPort:0 error:&err]) {
+    if (![_udpSocket bindToPort:SRWiFiUDPPort error:&err]) {
         NSLog(@"bindToPort UDP err %@", err);
         
         return;
@@ -160,12 +157,10 @@ dispatch_queue_t wifiManagerQueue;
         }
     }
     
-    NSLog(@"refresh host for udp %@", _hostForUDP);
+//    NSLog(@"refresh host for udp %@", _hostForUDP);
 }
 
-- (void)sendData:(NSData *)data withType:(SRWiFiManagerConnectType)type times:(NSUInteger)times sendTag:(SRWiFiManagerSendDataTag)tag timeout:(NSInteger)timeout receiver:(SRWiFiManagerSendReceiver)receiver {
-    _sendReceiver = receiver;
-    
+- (void)sendData:(NSData *)data withType:(SRWiFiManagerConnectType)type times:(NSUInteger)times sendTag:(SRWiFiManagerSendDataTag)tag timeout:(NSInteger)timeout {
     if (!data) {
         return;
     }
@@ -198,7 +193,6 @@ dispatch_queue_t wifiManagerQueue;
             break;
         }
         case SRWiFiManagerConnectTypeUDP: {
-            [self refreshHostForUDP];
             
             if (!_udpSocket) {
                 NSLog(@"udp is null");
@@ -211,13 +205,71 @@ dispatch_queue_t wifiManagerQueue;
                 
                 times --;
             } while (times > 0);
-        
+            
             break;
         }
             
         default:
             break;
     }
+    
+    NSLog(@"send data %@", data);
+}
+
+- (void)sendDataForScanWiFi {
+    if (!_udpSocket.isConnected) {
+        [self disconnectSocket];
+        
+        [self refreshHostForUDP];
+        
+        [self connectUDPWithPort:SRWiFiUDPPort];
+    }
+    
+    NSData *data = [@"HF-A11ASSISTHREAD" dataUsingEncoding:NSASCIIStringEncoding];
+    
+    NSString *host = @"10.10.100.255";
+    int port = 48899;
+    
+    for (int i = 0; i < 30; i++) {
+        [_udpSocket sendData:data toHost:host port:port withTimeout:-1 tag:0];
+        
+        NSLog(@"send data %@ host %@ port %d", data, host, port);
+        
+        if (i == 29) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                NSData *secondData = [@"+ok" dataUsingEncoding:NSASCIIStringEncoding];
+                
+                //                for (int j = 0; j < 3; j++) {
+                [_udpSocket sendData:secondData toHost:host port:port withTimeout:-1 tag:0];
+                //                }
+                
+                
+                
+                // the last
+                //                if (_lamps.count > 0) {
+                //                    [self closeUDPSocket];
+                //
+                //                    [self setupTCPSocketWithLamp:_lamps.firstObject];
+                //                }
+            });
+        }
+    }
+
+    
+//    NSData *scanData = [@"HF-A11ASSISTHREAD" dataUsingEncoding:NSASCIIStringEncoding];
+//    
+//    NSData *okData = [@"+ok" dataUsingEncoding:NSASCIIStringEncoding];
+//    
+//    for (int i = 0; i < 30; i++) {
+//        [_udpSocket sendData:scanData toHost:_hostForUDP port:SRWiFiUDPPort withTimeout:-1 tag:0];
+//        
+//        if (i == 29) {
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [_udpSocket sendData:okData toHost:_hostForUDP port:SRWiFiUDPPort withTimeout:-1 tag:0];
+//            });
+//        }
+//    }
 }
 
 + (NSString *)getWiFiName
@@ -237,7 +289,7 @@ dispatch_queue_t wifiManagerQueue;
         
         if (dictRef) {
             NSDictionary *networkInfo = (__bridge NSDictionary *)dictRef;
-            NSLog(@"network info -> %@", networkInfo);
+//            NSLog(@"network info -> %@", networkInfo);
             wifiName = [networkInfo objectForKey:(__bridge NSString *)kCNNetworkInfoKeySSID];
             
             CFRelease(dictRef);
@@ -246,7 +298,7 @@ dispatch_queue_t wifiManagerQueue;
     
     CFRelease(wifiInterfaces);
     
-    NSLog(@"wifiName %@", wifiName);
+//    NSLog(@"wifiName %@", wifiName);
     
     return wifiName;
 }
@@ -281,10 +333,11 @@ dispatch_queue_t wifiManagerQueue;
 
 - (void)setupDidInit {
     _receiverDictionary = [NSMutableDictionary dictionary];
-    _wifiDevices = [NSMutableArray array];
+    _wifiDevicesDictionary = [NSMutableDictionary dictionary];
     _tcpSocketDictionary = [NSMutableDictionary dictionary];
     
     wifiManagerQueue = dispatch_queue_create("SRWiFiManagerQueue", DISPATCH_QUEUE_CONCURRENT);
+//    wifiManagerQueue = dispatch_get_main_queue();
     
     _reconnectTimes = 3;
 }
@@ -292,8 +345,9 @@ dispatch_queue_t wifiManagerQueue;
 - (void)startTCPHeartBeatTimer {
     [self stopTCHHeartBeatTimer];
     
-    _tcpHeartBeatTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendTCPHeartBeatPackage) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:_tcpHeartBeatTimer forMode:NSRunLoopCommonModes];
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        _tcpHeartBeatTimer = [NSTimer scheduledTimerWithTimeInterval:SRWiFiTCPHeartBeatSendInterval target:self selector:@selector(sendTCPHeartBeatPackage) userInfo:nil repeats:YES];
+    });
 }
 
 - (void)stopTCHHeartBeatTimer {
@@ -324,6 +378,32 @@ dispatch_queue_t wifiManagerQueue;
     });
 }
 
++ (SRWiFiDevice *)convertReceiveStringToWiFiDevice:(NSString *)aString {
+    SRWiFiDevice *device = nil;
+    
+    if (aString.length > 0) {
+        NSArray *aComponents = [aString componentsSeparatedByString:@","];
+        
+        if (aComponents.count >= 5) {
+            NSString *mac = aComponents[2];
+            
+            if (mac.length == 17) {
+                NSString *name = aComponents[1];
+                NSString *security = aComponents[3];
+                
+                device = [[SRWiFiDevice alloc] init];
+                device.name = name;
+                device.security = security;
+                device.macAddrss = mac;
+                
+                NSLog(@"found a device name %@", name);
+            }
+        }
+    }
+    
+    return device;
+}
+
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
@@ -331,7 +411,7 @@ dispatch_queue_t wifiManagerQueue;
     
     [_tcpSocketDictionary setObject:sock forKey:host];
     
-    [self startTCPHeartBeatTimer]; 
+    [self startTCPHeartBeatTimer];
     
     NSLog(@"tcp did connect to host %@, port %d, connected host %@", sock.localHost, (int)port, sock.connectedHost);
 }
@@ -387,15 +467,11 @@ dispatch_queue_t wifiManagerQueue;
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext {
-    NSString *dataString = [NSString stringWithCString:data.bytes encoding:NSASCIIStringEncoding];
+    NSString *dataString = [NSString stringWithCString:data.bytes encoding:NSUTF8StringEncoding];
     
-    if (_sendReceiver) {
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            _sendReceiver(dataString);
-        });
-    }
+    NSLog(@"udp did receive \n%@", dataString);    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SRWiFiManagerNotiUDPReceiveData object:data.copy];
     
-    NSLog(@"udp did receive form address\n%@\n%@\nfilter%@",address, dataString, filterContext);
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag {
