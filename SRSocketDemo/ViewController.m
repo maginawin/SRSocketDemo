@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "SRWiFiManager.h"
 #import "SRRoomTableViewCellModel.h"
+#import "SRSettingRouterViewController.h"
 
 typedef NS_ENUM(NSInteger, SRWiFiManagerScanType) {
     SRWiFiManagerScanTypeDefault = 0, // Use for scan UDP host
@@ -184,6 +185,21 @@ typedef NS_ENUM(NSInteger, SRWiFiManagerScanType) {
 }
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    SRWiFiDevice *device = _scanDevicesArray[indexPath.row];
+    
+    SRSettingRouterViewController *settingRouterVC = [[SRSettingRouterViewController alloc] initWithNibName:@"SRSettingRouterViewController" bundle:nil];
+    settingRouterVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    if (device) {
+        settingRouterVC.wifiDevice = device;
+    }
+    
+    [self presentViewController:settingRouterVC animated:YES completion:nil];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _scanDevicesArray.count;

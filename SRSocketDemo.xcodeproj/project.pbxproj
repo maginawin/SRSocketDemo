@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4A525041C4CE63800DC6EA9 /* SRSettingRouterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A525021C4CE63800DC6EA9 /* SRSettingRouterViewController.m */; };
+		A4A525051C4CE63800DC6EA9 /* SRSettingRouterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4A525031C4CE63800DC6EA9 /* SRSettingRouterViewController.xib */; };
 		A4ABC01C1C48E16E00CBAC09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC01B1C48E16E00CBAC09 /* main.m */; };
 		A4ABC01F1C48E16E00CBAC09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC01E1C48E16E00CBAC09 /* AppDelegate.m */; };
 		A4ABC0221C48E16E00CBAC09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0211C48E16E00CBAC09 /* ViewController.m */; };
@@ -23,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A4A525011C4CE63800DC6EA9 /* SRSettingRouterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSettingRouterViewController.h; sourceTree = "<group>"; };
+		A4A525021C4CE63800DC6EA9 /* SRSettingRouterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSettingRouterViewController.m; sourceTree = "<group>"; };
+		A4A525031C4CE63800DC6EA9 /* SRSettingRouterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SRSettingRouterViewController.xib; sourceTree = "<group>"; };
 		A4ABC0171C48E16E00CBAC09 /* SRSocketDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRSocketDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4ABC01B1C48E16E00CBAC09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4ABC01D1C48E16E00CBAC09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -80,6 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				A4ABC0311C48E17A00CBAC09 /* SRWiFi */,
+				A4A525011C4CE63800DC6EA9 /* SRSettingRouterViewController.h */,
+				A4A525021C4CE63800DC6EA9 /* SRSettingRouterViewController.m */,
+				A4A525031C4CE63800DC6EA9 /* SRSettingRouterViewController.xib */,
 				A4ABC01D1C48E16E00CBAC09 /* AppDelegate.h */,
 				A4ABC01E1C48E16E00CBAC09 /* AppDelegate.m */,
 				A4ABC0201C48E16E00CBAC09 /* ViewController.h */,
@@ -190,6 +198,7 @@
 				A4ABC02A1C48E16E00CBAC09 /* LaunchScreen.storyboard in Resources */,
 				A4ABC0271C48E16E00CBAC09 /* Assets.xcassets in Resources */,
 				A4ABC0251C48E16E00CBAC09 /* Main.storyboard in Resources */,
+				A4A525051C4CE63800DC6EA9 /* SRSettingRouterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +212,7 @@
 				A4ABC0431C48EC3C00CBAC09 /* SRLampModel.m in Sources */,
 				A4ABC0221C48E16E00CBAC09 /* ViewController.m in Sources */,
 				A4ABC01F1C48E16E00CBAC09 /* AppDelegate.m in Sources */,
+				A4A525041C4CE63800DC6EA9 /* SRSettingRouterViewController.m in Sources */,
 				A4ABC03A1C48E1AC00CBAC09 /* SRWiFiProtocol.m in Sources */,
 				A4ABC01C1C48E16E00CBAC09 /* main.m in Sources */,
 				A4ABC0371C48E19500CBAC09 /* SRWiFiDevice.m in Sources */,
@@ -360,6 +370,7 @@
 				A4ABC0301C48E16E00CBAC09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
