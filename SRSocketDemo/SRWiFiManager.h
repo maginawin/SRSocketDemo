@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GCDAsyncSocket.h"
+#import "GCDAsyncUdpSocket.h"
 #import "SRWiFiDevice.h"
 #import "SRWiFiProtocol.h"
 
@@ -27,7 +29,8 @@ typedef NS_ENUM(NSInteger, SRWiFiManagerSendDataTag) {
     SRWiFiManagerSendDataTagForSettingWiFiName = 4,
     SRWiFiManagerSendDataTagForSettingWiFiSecurity = 5,
     SRWiFiManagerSendDataTagForSettingMode = 6,
-    SRWiFiManagerSendDataTagForSettingEnd = 7
+    SRWiFiManagerSendDataTagForSettingEnd = 7,
+    SRWiFiManagerSendDataTagForHeartBeatPackage = 8
 };
 
 typedef void (^ SRWiFiManagerSendReceiver) (NSString *receivedString);
@@ -35,6 +38,8 @@ typedef void (^ SRWiFiManagerSendReceiver) (NSString *receivedString);
 @interface SRWiFiManager : NSObject
 
 @property (nonatomic, readonly) SRWiFiManagerConnectType connectType;
+
+@property (strong, nonatomic) NSMutableDictionary<NSString *, GCDAsyncSocket *> *tcpSocketDictionary;
 
 @property (strong, nonatomic) NSMutableArray<SRWiFiDevice *> *wifiDevices;
 

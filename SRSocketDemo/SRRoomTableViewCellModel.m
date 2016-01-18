@@ -26,6 +26,10 @@
     model.index = self.index;
     model.lamps = self.lamps.mutableCopy;
     
+    model.deviceNumber = self.deviceNumber.copy;
+    model.subdevicesBit = self.subdevicesBit;
+    model.brightness = self.brightness;
+    
     return model;
 }
 
@@ -36,6 +40,12 @@
     _isHighlighted = NO;
     _index = 0;
     _lamps = [NSMutableArray array];
+    
+    _header = 0x55;
+    _deviceType = 0x01;
+    _dataType = 0x08;
+    _keyNubmer = 0x38;
+    _brightness = 0x01;
 }
 
 - (CGFloat)heightInTableView:(UITableView *)tableView {

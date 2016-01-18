@@ -7,8 +7,6 @@
 //
 
 #import "SRWiFiManager.h"
-#import "GCDAsyncSocket.h"
-#import "GCDAsyncUdpSocket.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <ifaddrs.h>
 #import <arpa/inet.h>
@@ -16,7 +14,7 @@
 @interface SRWiFiManager () <GCDAsyncSocketDelegate, GCDAsyncUdpSocketDelegate>
 
 //@property (strong, nonatomic) GCDAsyncSocket *tcpSocket;
-@property (strong, nonatomic) NSMutableDictionary<NSString *, GCDAsyncSocket *> *tcpSocketDictionary;
+
 @property (strong, nonatomic) GCDAsyncUdpSocket *udpSocket;
 
 @property (strong, nonatomic) SRWiFiManagerSendReceiver sendReceiver;
@@ -24,6 +22,8 @@
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, NSString *> *receiverDictionary;
 
 @property (nonatomic) NSUInteger reconnectTimes;
+
+@property (strong, nonatomic) NSTimer *tcpHeartBeatTimer;
 
 @end
 
@@ -113,6 +113,8 @@ dispatch_queue_t wifiManagerQueue;
 }
 
 - (void)disconnectSocket {
+    [self stopTCHHeartBeatTimer];
+    
     if (_tcpSocketDictionary) {
         for (NSString *host in _tcpSocketDictionary) {
             GCDAsyncSocket *tcpSocket = _tcpSocketDictionary[host];
@@ -123,6 +125,8 @@ dispatch_queue_t wifiManagerQueue;
             
             tcpSocket = nil;
         }
+        
+        [_tcpSocketDictionary removeAllObjects];
     }
     
     if (_udpSocket) {
@@ -173,7 +177,23 @@ dispatch_queue_t wifiManagerQueue;
     
     switch (type) {
         case SRWiFiManagerConnectTypeTCP: {
+            if (_tcpSocketDictionary.count < 1) {
+                NSLog(@"tcp dict is null");
+                
+                return;
+            }
             
+            do {
+                for (NSString *key in _tcpSocketDictionary) {
+                    GCDAsyncSocket *tcpSocket = _tcpSocketDictionary[key];
+                    
+                    if (tcpSocket && tcpSocket.isConnected) {
+                        [tcpSocket writeData:data withTimeout:timeout tag:tag];
+                    }
+                }
+                
+                times --;
+            } while(times > 0);
             
             break;
         }
@@ -269,18 +289,71 @@ dispatch_queue_t wifiManagerQueue;
     _reconnectTimes = 3;
 }
 
+- (void)startTCPHeartBeatTimer {
+    [self stopTCHHeartBeatTimer];
+    
+    _tcpHeartBeatTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(sendTCPHeartBeatPackage) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_tcpHeartBeatTimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)stopTCHHeartBeatTimer {
+    if (_tcpHeartBeatTimer) {
+        [_tcpHeartBeatTimer invalidate];
+        _tcpHeartBeatTimer = nil;
+    }
+}
+
+- (void)sendTCPHeartBeatPackage {
+    dispatch_async(wifiManagerQueue, ^ {
+        if (_tcpSocketDictionary.count < 1) {
+            return;
+        }
+        
+        unsigned const char hb = 0xFF;
+        NSData *data = [NSData dataWithBytes:&hb length:1];
+        
+        for (NSString *key in _tcpSocketDictionary) {
+            GCDAsyncSocket *socket = _tcpSocketDictionary[key];
+            
+            if (socket.isConnected) {
+                [socket writeData:data withTimeout:-1 tag:SRWiFiManagerSendDataTagForHeartBeatPackage];
+                
+                NSLog(@"send tcp hb host %@", socket.connectedHost);
+            }
+        }
+    });
+}
+
 #pragma mark - GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     _connectType = SRWiFiManagerConnectTypeTCP;
+    
+    [_tcpSocketDictionary setObject:sock forKey:host];
+    
+    [self startTCPHeartBeatTimer]; 
+    
+    NSLog(@"tcp did connect to host %@, port %d, connected host %@", sock.localHost, (int)port, sock.connectedHost);
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
 
+    NSLog(@"tcp did read data %@ with tag %d", data, (int)tag);
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     _connectType = SRWiFiManagerConnectTypeDisconnected;
+    
+    if (err) {
+        
+    }
+    
+    NSLog(@"tcp did disconnect socket %@ err %@", sock, err);
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    
+    NSLog(@"tcp did write data with tag %d", (int)tag);
 }
 
 #pragma mark - GCDAsyncUdpSocketDelegate
@@ -317,7 +390,9 @@ dispatch_queue_t wifiManagerQueue;
     NSString *dataString = [NSString stringWithCString:data.bytes encoding:NSASCIIStringEncoding];
     
     if (_sendReceiver) {
-        _sendReceiver(dataString);
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            _sendReceiver(dataString);
+        });
     }
     
     NSLog(@"udp did receive form address\n%@\n%@\nfilter%@",address, dataString, filterContext);
