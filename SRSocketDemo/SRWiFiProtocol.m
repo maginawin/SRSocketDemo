@@ -58,15 +58,53 @@
 }
 
 + (NSData *)srDataForSettingWiFiName:(NSString *)wifiName {
+    if (!wifiName) {
+        return nil;
+    }
+    
     NSMutableData *result = [NSMutableData data];
     
+    NSData *header = [@"AT+WSSSID=" dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *nameData = [wifiName dataUsingEncoding:NSUTF8StringEncoding];
+    
+    unsigned const char end = 0x0D;
+    
+    [result appendData:header];
+    [result appendData:nameData];
+    [result appendBytes:&end length:1];
     
     return result;
 }
 
 + (NSData *)srDataForSettingWiFiSecurity:(NSString *)security password:(NSString *)password {
+    if (!security) {
+        return nil;
+    }
+    
+    NSArray *securityComponents = [security componentsSeparatedByString:@"/"];
+    
+    if (securityComponents.count != 2) {
+        return nil;
+    }
+    
     NSMutableData *result = [NSMutableData data];
     
+    NSData *header = [@"AT+WSKEY=" dataUsingEncoding:NSASCIIStringEncoding];
+    
+    NSString *xxx = [NSString stringWithFormat:@"%@,", securityComponents.firstObject];
+    NSString *yyy = [NSString stringWithFormat:@"%@,", securityComponents[1]];
+    
+    NSData *xxxData = [xxx dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *yyyData = [yyy dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *zzzData = [password dataUsingEncoding:NSASCIIStringEncoding];
+    
+    unsigned const char end = 0x0D;
+    
+    [result appendData:header];
+    [result appendData:xxxData];
+    [result appendData:yyyData];
+    [result appendData:zzzData];
+    [result appendBytes:&end length:1];
     
     return result;
 }
@@ -74,6 +112,8 @@
 + (NSData *)srDataForSettingMode {
     NSMutableData *result = [NSMutableData data];
     
+    NSData *header = [@"AT+WMODE=STA" dataUsingEncoding:NSASCIIStringEncoding];    
+    [result appendData:header];
     
     return result;
 }
@@ -81,6 +121,8 @@
 + (NSData *)srDataForSettingEnd {
     NSMutableData *result = [NSMutableData data];
     
+    NSData *header = [@"AT+Z" dataUsingEncoding:NSASCIIStringEncoding];
+    [result appendData:header];
     
     return result;
 }

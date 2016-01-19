@@ -9,10 +9,20 @@
 #import "SRSettingRouterViewController.h"
 #import "SRWiFiManager.h"
 
+typedef NS_ENUM(NSInteger, SRWiFiSettingRouterType) {
+    SRWiFiSettingRouterTypeNone = 0,
+    SRWiFiSettingRouterTypeName = 1,
+    SRWiFiSettingRouterTypePassword = 2,
+    SRWiFiSettingRouterTypeMode = 3,
+    SRWiFiSettingRouterTypeEnd = 4
+};
+
 @interface SRSettingRouterViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
+@property (nonatomic) SRWiFiSettingRouterType settingRouterType;
 
 @end
 
@@ -20,6 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _settingRouterType = SRWiFiSettingRouterTypeNone;
     
     _passwordTextField.delegate = self;
 
@@ -32,6 +44,49 @@
     }
     
     [_passwordTextField becomeFirstResponder];
+    
+    // Set notification
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWiFiManagerNotiUDPReceiveData:) name:SRWiFiManagerNotiUDPReceiveData object:nil];
+}
+
+- (void)handleWiFiManagerNotiUDPReceiveData:(NSNotification *)noti {
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        NSData *data = noti.object;
+        
+        if (data) {
+            NSString *receiveString = [NSString stringWithUTF8String:data.bytes];
+            
+            if (receiveString.length > 8) {
+                NSString *tag0String = [receiveString substringToIndex:8];
+                
+                if ([tag0String isEqualToString:@"AT+WSKEY"]) {
+                    if (_settingRouterType == SRWiFiSettingRouterTypePassword) {
+                        _settingRouterType = SRWiFiSettingRouterTypeMode;
+                        [[SRWiFiManager sharedInstance] sendData:[SRWiFiProtocol srDataForSettingMode] withType:SRWiFiManagerConnectTypeUDP times:3 sendTag:SRWiFiManagerSendDataTagForSettingMode timeout:-1];
+                    }
+                } else if ([tag0String isEqualToString:@"AT+WSSSI"]) {
+                    if (_settingRouterType == SRWiFiSettingRouterTypeName) {
+                        _settingRouterType = SRWiFiSettingRouterTypePassword;
+                        [[SRWiFiManager sharedInstance] sendData:[SRWiFiProtocol srDataForSettingWiFiSecurity:_wifiDevice.security password:_passwordTextField.text] withType:SRWiFiManagerConnectTypeUDP times:3 sendTag:SRWiFiManagerSendDataTagForSettingWiFiSecurity timeout:-1];
+                    }
+                }
+            }
+            
+            if (receiveString.length >= 3) {
+                NSString *tag1String = [receiveString substringToIndex:3];
+                
+                if ([tag1String isEqualToString:@"+ok"]) {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        if (_settingRouterType == SRWiFiSettingRouterTypeMode) {
+                            _settingRouterType = SRWiFiSettingRouterTypeEnd;
+                            [[SRWiFiManager sharedInstance] sendData:[SRWiFiProtocol srDataForSettingEnd] withType:SRWiFiManagerConnectTypeUDP times:3 sendTag:SRWiFiManagerSendDataTagForSettingWiFiSecurity timeout:-1];
+                        }
+                    });
+                }
+            }
+        }
+    });
 }
 
 - (IBAction)closeClick:(id)sender {
@@ -41,43 +96,36 @@
 
 - (IBAction)sendClick:(id)sender {
     // Send data
+    [self sendData];
     
     [_passwordTextField resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    if (string.length < 1) {
-        if ((textField.text.length - 1) < 1) {
-            _sendButton.enabled = NO;
-        }
-    } else {
-        _sendButton.enabled = YES;
-    }
-    
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField {
-    _sendButton.enabled = NO;
-    
-    return YES;
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField.text.length > 0) {
-        [textField resignFirstResponder];
+
+    [textField resignFirstResponder];
+    
+    // Send data
+    [self sendData];
+    
+//        [self dismissViewControllerAnimated:YES completion:nil];
+
+    return YES;
+}
+
+- (void)sendData {
+    if (_wifiDevice) {
+        NSData *nameData = [SRWiFiProtocol srDataForSettingWiFiName:_wifiDevice.name];
         
-        // Send data
+        _settingRouterType = SRWiFiSettingRouterTypeName;
+        [[SRWiFiManager sharedInstance] sendData:nameData withType:SRWiFiManagerConnectTypeUDP times:3 sendTag:SRWiFiManagerSendDataTagForSettingWiFiName timeout:-1];
         
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-        return YES;
-    } else {
-        return NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+        });
     }
 }
 
