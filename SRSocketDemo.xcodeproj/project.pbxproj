@@ -22,6 +22,19 @@
 		A4ABC0431C48EC3C00CBAC09 /* SRLampModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0421C48EC3C00CBAC09 /* SRLampModel.m */; };
 		A4ABC0481C48F21A00CBAC09 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0451C48F21A00CBAC09 /* GCDAsyncSocket.m */; };
 		A4ABC0491C48F21A00CBAC09 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ABC0471C48F21A00CBAC09 /* GCDAsyncUdpSocket.m */; };
+		A4F3FE231C4E05F500199058 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F3FE221C4E05F500199058 /* MBProgressHUD.m */; };
+		A4F3FE311C4E061500199058 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE251C4E061500199058 /* 37x-Checkmark.png */; };
+		A4F3FE321C4E061500199058 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE261C4E061500199058 /* 37x-Checkmark@2x.png */; };
+		A4F3FE331C4E061500199058 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE271C4E061500199058 /* Default-568h@2x.png */; };
+		A4F3FE341C4E061500199058 /* Default-iOS7-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE281C4E061500199058 /* Default-iOS7-568h@2x.png */; };
+		A4F3FE351C4E061500199058 /* Default-iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE291C4E061500199058 /* Default-iOS7@2x.png */; };
+		A4F3FE361C4E061500199058 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE2A1C4E061500199058 /* Default.png */; };
+		A4F3FE371C4E061500199058 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE2B1C4E061500199058 /* Default@2x.png */; };
+		A4F3FE381C4E061500199058 /* Icon-iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE2C1C4E061500199058 /* Icon-iOS7@2x.png */; };
+		A4F3FE391C4E061500199058 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE2D1C4E061500199058 /* Icon-Small.png */; };
+		A4F3FE3A1C4E061500199058 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE2E1C4E061500199058 /* Icon-Small@2x.png */; };
+		A4F3FE3B1C4E061500199058 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE2F1C4E061500199058 /* Icon.png */; };
+		A4F3FE3C1C4E061500199058 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F3FE301C4E061500199058 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +65,20 @@
 		A4ABC0451C48F21A00CBAC09 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		A4ABC0461C48F21A00CBAC09 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		A4ABC0471C48F21A00CBAC09 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		A4F3FE211C4E05F500199058 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A4F3FE221C4E05F500199058 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A4F3FE251C4E061500199058 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		A4F3FE261C4E061500199058 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
+		A4F3FE271C4E061500199058 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A4F3FE281C4E061500199058 /* Default-iOS7-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-iOS7-568h@2x.png"; sourceTree = "<group>"; };
+		A4F3FE291C4E061500199058 /* Default-iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-iOS7@2x.png"; sourceTree = "<group>"; };
+		A4F3FE2A1C4E061500199058 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A4F3FE2B1C4E061500199058 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A4F3FE2C1C4E061500199058 /* Icon-iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-iOS7@2x.png"; sourceTree = "<group>"; };
+		A4F3FE2D1C4E061500199058 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		A4F3FE2E1C4E061500199058 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		A4F3FE2F1C4E061500199058 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		A4F3FE301C4E061500199058 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +111,7 @@
 		A4ABC0191C48E16E00CBAC09 /* SRSocketDemo */ = {
 			isa = PBXGroup;
 			children = (
+				A4F3FE201C4E05E700199058 /* MBProgressHUD */,
 				A4ABC0311C48E17A00CBAC09 /* SRWiFi */,
 				A4A525011C4CE63800DC6EA9 /* SRSettingRouterViewController.h */,
 				A4A525021C4CE63800DC6EA9 /* SRSettingRouterViewController.m */,
@@ -136,6 +164,35 @@
 				A4ABC0471C48F21A00CBAC09 /* GCDAsyncUdpSocket.m */,
 			);
 			name = GCDAsyncSocket;
+			sourceTree = "<group>";
+		};
+		A4F3FE201C4E05E700199058 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				A4F3FE241C4E060500199058 /* Images */,
+				A4F3FE211C4E05F500199058 /* MBProgressHUD.h */,
+				A4F3FE221C4E05F500199058 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		A4F3FE241C4E060500199058 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				A4F3FE251C4E061500199058 /* 37x-Checkmark.png */,
+				A4F3FE261C4E061500199058 /* 37x-Checkmark@2x.png */,
+				A4F3FE271C4E061500199058 /* Default-568h@2x.png */,
+				A4F3FE281C4E061500199058 /* Default-iOS7-568h@2x.png */,
+				A4F3FE291C4E061500199058 /* Default-iOS7@2x.png */,
+				A4F3FE2A1C4E061500199058 /* Default.png */,
+				A4F3FE2B1C4E061500199058 /* Default@2x.png */,
+				A4F3FE2C1C4E061500199058 /* Icon-iOS7@2x.png */,
+				A4F3FE2D1C4E061500199058 /* Icon-Small.png */,
+				A4F3FE2E1C4E061500199058 /* Icon-Small@2x.png */,
+				A4F3FE2F1C4E061500199058 /* Icon.png */,
+				A4F3FE301C4E061500199058 /* Icon@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,9 +253,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4ABC02A1C48E16E00CBAC09 /* LaunchScreen.storyboard in Resources */,
+				A4F3FE3C1C4E061500199058 /* Icon@2x.png in Resources */,
+				A4F3FE341C4E061500199058 /* Default-iOS7-568h@2x.png in Resources */,
 				A4ABC0271C48E16E00CBAC09 /* Assets.xcassets in Resources */,
+				A4F3FE391C4E061500199058 /* Icon-Small.png in Resources */,
 				A4ABC0251C48E16E00CBAC09 /* Main.storyboard in Resources */,
 				A4A525051C4CE63800DC6EA9 /* SRSettingRouterViewController.xib in Resources */,
+				A4F3FE371C4E061500199058 /* Default@2x.png in Resources */,
+				A4F3FE311C4E061500199058 /* 37x-Checkmark.png in Resources */,
+				A4F3FE331C4E061500199058 /* Default-568h@2x.png in Resources */,
+				A4F3FE351C4E061500199058 /* Default-iOS7@2x.png in Resources */,
+				A4F3FE381C4E061500199058 /* Icon-iOS7@2x.png in Resources */,
+				A4F3FE321C4E061500199058 /* 37x-Checkmark@2x.png in Resources */,
+				A4F3FE3B1C4E061500199058 /* Icon.png in Resources */,
+				A4F3FE361C4E061500199058 /* Default.png in Resources */,
+				A4F3FE3A1C4E061500199058 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +285,7 @@
 				A4ABC03A1C48E1AC00CBAC09 /* SRWiFiProtocol.m in Sources */,
 				A4ABC01C1C48E16E00CBAC09 /* main.m in Sources */,
 				A4ABC0371C48E19500CBAC09 /* SRWiFiDevice.m in Sources */,
+				A4F3FE231C4E05F500199058 /* MBProgressHUD.m in Sources */,
 				A4ABC0491C48F21A00CBAC09 /* GCDAsyncUdpSocket.m in Sources */,
 				A4ABC0481C48F21A00CBAC09 /* GCDAsyncSocket.m in Sources */,
 				A4ABC0401C48EC2000CBAC09 /* SRRoomTableViewCellModel.m in Sources */,

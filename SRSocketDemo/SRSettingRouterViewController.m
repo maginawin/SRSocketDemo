@@ -8,6 +8,7 @@
 
 #import "SRSettingRouterViewController.h"
 #import "SRWiFiManager.h"
+#import "MBProgressHUD.h"
 
 typedef NS_ENUM(NSInteger, SRWiFiSettingRouterType) {
     SRWiFiSettingRouterTypeNone = 0,
@@ -17,10 +18,11 @@ typedef NS_ENUM(NSInteger, SRWiFiSettingRouterType) {
     SRWiFiSettingRouterTypeEnd = 4
 };
 
-@interface SRSettingRouterViewController () <UITextFieldDelegate>
+@interface SRSettingRouterViewController () <UITextFieldDelegate, MBProgressHUDDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (strong, nonatomic) MBProgressHUD *progressHUD;
 
 @property (nonatomic) SRWiFiSettingRouterType settingRouterType;
 
@@ -48,6 +50,10 @@ typedef NS_ENUM(NSInteger, SRWiFiSettingRouterType) {
     // Set notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWiFiManagerNotiUDPReceiveData:) name:SRWiFiManagerNotiUDPReceiveData object:nil];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)handleWiFiManagerNotiUDPReceiveData:(NSNotification *)noti {
@@ -117,21 +123,66 @@ typedef NS_ENUM(NSInteger, SRWiFiSettingRouterType) {
 }
 
 - (void)sendData {
+    if (![SRWiFiManager isWiFiConnected]) {
+        _progressHUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _progressHUD.mode = MBProgressHUDModeText;
+        _progressHUD.labelText = @"Please connect to device";
+        _progressHUD.margin = 10;
+        _progressHUD.removeFromSuperViewOnHide = YES;
+        _progressHUD.dimBackground = YES;
+        
+        [_progressHUD hide:YES afterDelay:3];
+        
+        return;
+    }
+    
+    _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_progressHUD];
+    
+    _progressHUD.mode = MBProgressHUDModeAnnularDeterminate;
+    _progressHUD.delegate = self;
+    _progressHUD.labelText = @"Setting...";
+    _progressHUD.removeFromSuperViewOnHide = YES;
+    _progressHUD.dimBackground = YES;
+    
+    [_progressHUD showWhileExecuting:@selector(handleSetting) onTarget:self withObject:nil animated:YES];
+    
     if (_wifiDevice) {
         NSData *nameData = [SRWiFiProtocol srDataForSettingWiFiName:_wifiDevice.name];
         
         _settingRouterType = SRWiFiSettingRouterTypeName;
         [[SRWiFiManager sharedInstance] sendData:nameData withType:SRWiFiManagerConnectTypeUDP times:3 sendTag:SRWiFiManagerSendDataTagForSettingWiFiName timeout:-1];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-        });
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)handleSetting {
+    float progress = 0;
+    while (progress < 1.0) {
+        _progressHUD.progress = progress;
+        progress += 0.005;
+        usleep(20000);
+    }
+    
+    NSString *text = @"";
+    _progressHUD.labelText = text;
+    _progressHUD.hidden = YES;
+    // Success
+    if (_settingRouterType == SRWiFiSettingRouterTypeEnd) {
+        text = @"Configure successfully! Please reset WiFi controller";
+    } else {
+        text = @"WiFi controller Configuration failed，Please reset WiFi controller and reconnect the network";
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:text message:nil delegate:nil cancelButtonTitle:@"Confirm" otherButtonTitles:nil, nil];
+    alert.alertViewStyle = UIAlertViewStyleDefault;
+    [alert show];
+}
+
+#pragma mark - MBProgressHUDDelegate
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    [hud removeFromSuperview];
+    hud = nil;
 }
 
 /*
